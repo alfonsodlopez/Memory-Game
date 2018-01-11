@@ -40,11 +40,21 @@ class App extends Component {
     }
   }
 
+  resetClickState = () => {
+    const minions = this.state.malifaux.map(minion => {
+      minion.clicked = false
+      return minion
+    })
+    this.setState({malifaux: minions})
+  }
+
   updateClickedFor = id => {
     const minions = this.state.malifaux.map( minion => {
       if (minion.id === id) {
         if(minion.clicked === true) {
             alert("Already clicked on this one. Score reset!")
+            this.resetClickState()
+
             this.totalClicks = 0
         }
         else {
